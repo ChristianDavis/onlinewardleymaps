@@ -1,6 +1,6 @@
 name: CICD
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: test
-    if: success() && github.repository == 'damonsk/onlinewardleymaps' && github.event_name != 'pull_request' && github.ref == 'master'
+    if: success() && github.repository == 'damonsk/onlinewardleymaps' && github.ref == 'master'
     steps:
       - name: Generate build number
         id: buildnumber
