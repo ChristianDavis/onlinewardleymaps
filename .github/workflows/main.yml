@@ -1,6 +1,6 @@
-name: CI
+name: CICD
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -18,13 +18,18 @@ jobs:
       with:
         node-version: '10.x'
       env:
-          CI: false
+          CI: true
     - name: Write version number
       run: echo "export var owmBuild = \"1.${{ steps.buildnumber.outputs.build_number }}\";" > src/version.js
     - run: yarn install
     - run: yarn build
+    - run: yarn test
 
-
+  deploy:
+    if: success() && github.repository == 'damonsk/onlinewardleymaps' && github.event_name != 'pull_request' && github.ref == 'master'
+    runs-on: ubuntu-latest
+    needs: build
+    steps: 
     - name: Upload to S3.
       uses: jakejarvis/s3-sync-action@master
       with:
