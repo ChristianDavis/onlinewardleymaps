@@ -11,9 +11,9 @@ export const SVGWrapper = ({
 	title = '',
 	style = {},
 	mapStyleDefs,
-	width = '100%',
+	width = iconWidth,
 	className = '',
-	height = '100%',
+	height = iconHeight,
 	viewBox,
 	children,
 }) => (
@@ -36,11 +36,7 @@ export const SVGWrapper = ({
 const IconWrapper = memo(SVGWrapper);
 
 export const ComponentIcon = props => (
-	<IconWrapper
-		width={iconWidth}
-		height={iconHeight}
-		mapStyleDefs={props.mapStyleDefs}
-	>
+	<IconWrapper mapStyleDefs={props.mapStyleDefs}>
 		<ComponentTextSymbol
 			styles={props.mapStyleDefs.component}
 			text={props.text || 'Component'}
@@ -75,5 +71,23 @@ export const InertiaIcon = props => (
 		/>
 		<ComponentSymbol styles={props.mapStyleDefs.component} cx="8px" cy="25px" />
 		<InertiaSymbol x={50} y={25} />
+	</IconWrapper>
+);
+
+export const NoteIcon = props => (
+	<IconWrapper mapStyleDefs={props.mapStyleDefs}>
+		<ComponentTextSymbol
+			styles={props.mapStyleDefs.component}
+			note={'+Add a note'}
+			x="8"
+			y="15"
+			evolved={props.evolved}
+		/>
+		<ComponentSymbol
+			cx="8px"
+			cy="25px"
+			evolved={props.evolved}
+			styles={props.mapStyleDefs.component}
+		/>
 	</IconWrapper>
 );

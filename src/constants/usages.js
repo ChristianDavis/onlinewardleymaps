@@ -2,6 +2,7 @@ import {
 	ComponentIcon,
 	InertiaIcon,
 	ComponentEvolvedIcon,
+	NoteIcon,
 } from '../components/symbols/icons';
 
 const usages = [
@@ -65,6 +66,15 @@ const usages = [
 		],
 	},
 	{
+		title: 'Add notes',
+		Icon: NoteIcon,
+		summary: 'Add text to any part of the map',
+		examples: [
+			'note Note Text [0.9, 0.5]',
+			'note +future development [0.9, 0.5]',
+		],
+	},
+	{
 		title: 'Stages of Evolution',
 		summary: 'Change the stages of evolution labels on the map',
 		examples: [
@@ -78,14 +88,6 @@ const usages = [
 		examples: [
 			'y-axis Label->Min->Max',
 			'y-axis Value Chain->Invisible->Visible',
-		],
-	},
-	{
-		title: 'Add notes',
-		summary: 'Add text to any part of the map',
-		examples: [
-			'note Note Text [0.9, 0.5]',
-			'note +future development [0.9, 0.5]',
 		],
 	},
 	{
