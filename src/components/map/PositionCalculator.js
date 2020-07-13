@@ -1,4 +1,9 @@
+let count = 0;
 export default class PositionCalculator {
+	constructor() {
+		count += 1;
+		console.log(count);
+	}
 	visibilityToY(visibility, mapHeight) {
 		return (1 - visibility) * mapHeight;
 	}

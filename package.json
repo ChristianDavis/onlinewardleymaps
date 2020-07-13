@@ -52,6 +52,7 @@
 		"core-js": "^3.6.5",
 		"create-react-class": "^15.6.3",
 		"html2canvas": "^1.0.0-rc.5",
+		"hull": "AndriiHeonia/hull#master",
 		"lodash.merge": "^4.6.2",
 		"prop-types": "^15.7.2",
 		"react": "^16.12.0",

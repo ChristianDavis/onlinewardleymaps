@@ -12,6 +12,7 @@ import AnnotationBox from './AnnotationBox';
 import Anchor from './Anchor';
 import Note from './Note';
 import Attitude from './Attitude';
+import Interest from './Interest';
 import LinksBuilder from '../../linkStrategies/LinksBuilder';
 import MapGraphics from './foundation/MapGraphics';
 import MapBackground from './foundation/MapBackground';
@@ -19,6 +20,96 @@ import SubMapSymbol from '../symbols/SubMapSymbol';
 import ComponentSymbol from '../symbols/ComponentSymbol';
 import MarketSymbol from '../symbols/MarketSymbol';
 import EcosystemSymbol from '../symbols/EcosystemSymbol';
+
+const interestPoints = [
+	{
+		id: 4,
+		line: 4,
+		maturity: 0.61,
+		visibility: 0.79,
+		name: 'Cup of Tea',
+		inertia: false,
+		label: { x: 19, y: -4 },
+		evolving: false,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 5,
+		line: 5,
+		maturity: 0.78,
+		visibility: 0.73,
+		name: 'Cup',
+		inertia: false,
+		label: { x: 5, y: -10 },
+		evolving: false,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 6,
+		line: 6,
+		maturity: 0.81,
+		visibility: 0.63,
+		name: 'Tea',
+		inertia: false,
+		label: { x: 5, y: -10 },
+		evolving: false,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 7,
+		line: 7,
+		maturity: 0.8,
+		visibility: 0.52,
+		name: 'Hot Water',
+		inertia: false,
+		label: { x: 5, y: -10 },
+		evolving: false,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 8,
+		line: 8,
+		maturity: 0.82,
+		visibility: 0.38,
+		name: 'Water',
+		inertia: false,
+		label: { x: 5, y: -10 },
+		evolving: false,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 9,
+		line: 9,
+		maturity: 0.35,
+		visibility: 0.43,
+		name: 'Kettle',
+		inertia: false,
+		label: { x: -57, y: 4 },
+		evolveMaturity: 0.62,
+		evolving: true,
+		type: 'component',
+		pipeline: false,
+	},
+	{
+		id: 11,
+		line: 11,
+		maturity: 0.7,
+		visibility: 0.1,
+		name: 'Power',
+		inertia: false,
+		label: { x: -27, y: 20 },
+		evolveMaturity: 0.89,
+		evolving: true,
+		type: 'component',
+		pipeline: false,
+	},
+];
+//.map(p => [p.maturity * 100, p.visibility * 100]);
 
 function MapCanvas(props) {
 	const mapElements = new MapElements(
@@ -124,6 +215,18 @@ function MapCanvas(props) {
 								attitude={a}
 							/>
 						))}
+					</g>
+					<g id="area">
+						{interestPoints && (
+							<Interest
+								// key={i}
+								mapDimensions={props.mapDimensions}
+								mapStyleDefs={props.mapStyleDefs}
+								mapText={props.mapText}
+								mutateMapText={props.mutateMapText}
+								interestComps={interestPoints}
+							/>
+						)}
 					</g>
 
 					<g id="methods">
