@@ -11,6 +11,7 @@ const shouldHighlight = ({ isModKeyPressed }) => {
 };
 
 function Movable(props) {
+	const { isModKeyPressed } = props;
 	const x = useCallback(() => props.x, [props.x]);
 	const y = useCallback(() => props.y, [props.y]);
 	const [moving, setMoving] = React.useState(false);
@@ -37,6 +38,8 @@ function Movable(props) {
 	});
 
 	const handleMouseDown = e => {
+		console.log('MouseDown');
+
 		setMoving(true);
 		const pageX = e.pageX;
 		const pageY = e.pageY;
@@ -53,6 +56,8 @@ function Movable(props) {
 	};
 
 	const handleMouseUp = () => {
+		console.log('MouseUp');
+
 		document.removeEventListener('mousemove', handleMouseMove.current);
 		setPosition(position =>
 			Object.assign({}, position, {
@@ -62,6 +67,40 @@ function Movable(props) {
 		setMoving(false);
 		endDrag();
 	};
+
+	const handleMouseDownDraw = e => {
+		console.log('MouseDownDraw');
+		setMoving(true);
+		const pageX = e.pageX;
+		const pageY = e.pageY;
+
+		setPosition(position =>
+			Object.assign({}, position, {
+				coords: {
+					x: pageX,
+					y: pageY,
+				},
+			})
+		);
+		document.addEventListener('drawcomponentlink', handleMouseMove.current);
+	};
+
+	const handleMouseUpDraw = () => {
+		console.log('MouseUpDraw');
+
+		document.removeEventListener('mousemove', handleMouseMove.current);
+		setPosition(position =>
+			Object.assign({}, position, {
+				coords: {},
+			})
+		);
+		setMoving(false);
+		endDrag();
+	};
+
+	// const handleDrawingLine = e => {
+	// 	console.log('drag');
+	// };
 
 	function endDrag() {
 		let moved = {
@@ -79,15 +118,14 @@ function Movable(props) {
 		});
 		//if (props.onEffects !== undefined) props.onEffects();
 	}, [x, y]);
-	const filter = shouldHighlight(props);
 	return (
 		<g
 			is="custom"
 			class={'draggable'}
-			onMouseDown={e => handleMouseDown(e)}
-			onMouseUp={e => handleMouseUp(e)}
+			onMouseDown={isModKeyPressed ? handleMouseDownDraw : handleMouseDown}
+			onMouseUp={isModKeyPressed ? handleMouseUpDraw : handleMouseUp}
 			id={'movable_' + props.id}
-			filter={filter}
+			filter={shouldHighlight(props)}
 			transform={
 				'translate(' +
 				(props.fixedX ? x() : position.x) +

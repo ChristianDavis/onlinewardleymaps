@@ -40,6 +40,7 @@ const getHeight = () => {
 	var titleHeight = document.getElementById('title').clientHeight;
 	return winHeight - topNavHeight - titleHeight - 85;
 };
+
 const getWidth = () => {
 	return document.getElementById('map').clientWidth - 50;
 };

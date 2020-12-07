@@ -1,5 +1,7 @@
 import React from 'react';
 import PipelineComponentSymbol from '../symbols/PipelineComponentSymbol';
+import HighlightSymbol from '../symbols/HighlightSymbol';
+
 import ComponentText from './ComponentText';
 import PositionCalculator from './PositionCalculator';
 import Movable from './Movable';
@@ -8,7 +10,6 @@ import { ExistingCoordsMatcher } from './positionUpdaters/ExistingCoordsMatcher'
 import { ExistingSingleCoordMatcher } from './positionUpdaters/ExistingSingleCoordMatcher';
 import { NotDefinedCoordsMatcher } from './positionUpdaters/NotDefinedCoordsMatcher';
 import DefaultPositionUpdater from './positionUpdaters/DefaultPositionUpdater';
-
 import { useModKeyPressedConsumer } from '../KeyPressContext';
 
 function MapComponent(props) {
@@ -99,6 +100,7 @@ function MapComponent(props) {
 
 	return (
 		<>
+			{isModKeyPressed ? <HighlightSymbol cx={x} cy={y} radius={15} /> : null}
 			<Movable
 				id={'element_' + props.element.id}
 				onMove={endDrag}
